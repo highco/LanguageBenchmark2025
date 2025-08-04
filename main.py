@@ -26,17 +26,29 @@ def benchmark():
     
     start_time = time.perf_counter()
     
-    # First loop: join rooms
-    for i in range(50_000_000):
-        join_room(i % 17, i % 997)
+    for room_id in range(977):
+        for user_id in range(173):
+            join_room(room_id, user_id);
     
-    # Second loop: add user inputs
-    for i in range(50_000_000):
-        add_user_inputs(i % 17, i % 997, sample_inputs)
+    for i in range(123_456_789):
+        add_user_inputs(i % 997, i % 173, sample_inputs);
     
     end_time = time.perf_counter()
     
     print(f"{end_time - start_time:.9f}")
+
+    total_inputs_length = 0;
+    total_users = 0
+    for roomId in rooms:
+        room = rooms[roomId];
+        for userId in room.users:
+            user = room.users[userId];
+            total_inputs_length += len(user.inputs);
+        total_users += len(room.users);
+    print("Total rooms: ", len(rooms));
+    print("Total users: ", total_users);
+    print("Total inputs length:   ", total_inputs_length);
+
 
 def join_room(room_id, user_id):
     # Get existing room or create new one - O(1) operation

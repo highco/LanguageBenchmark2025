@@ -1,11 +1,9 @@
-
-
 // Use plain objects for even faster access in V8 when keys are integers
 class User {
     constructor(userId) {
         this.user_id = userId;
         // Pre-allocate Uint8Array with larger initial capacity
-        this.inputs = new Uint8Array(128); // Larger pre-allocation
+        this.inputs = new Uint8Array(64); // Larger pre-allocation
         this.inputsLength = 0;
     }
 }
@@ -31,21 +29,38 @@ function benchmark() {
     
     const startTime = process.hrtime.bigint();
     
-    // First loop: join rooms
-    for (let i = 0; i < 50_000_000; i++) {
-        joinRoom(i % 17, i % 997);
+    for(let room_id = 0; room_id < 977; ++room_id) {
+        for(let user_id = 0; user_id < 173; ++user_id) {
+            joinRoom(room_id, user_id);
+        }
     }
     
-    // Second loop: add user inputs
-    for (let i = 0; i < 50_000_000; i++) {
-        addUserInputs(i % 17, i % 997, sampleInputs);
+    for (let i = 0; i < 123_456_789; i++) {
+        addUserInputs(i % 997, i % 173, sampleInputs);
     }
     
     const endTime = process.hrtime.bigint();
     
     // Convert nanoseconds to milliseconds for display
     const duration = Number(endTime - startTime) / 1_000_000;
-    console.log(`${duration}ms`);
+    console.log(`${duration/1000} seconds`);
+
+    let total_inputs_capacity = 0;
+    let total_inputs_length = 0;
+    let total_users = 0
+    for (let roomId in rooms) {
+        let room = rooms[roomId];
+        for (let userId in room.users) {
+            let user = room.users[userId];
+            total_inputs_capacity += user.inputs.length;
+            total_inputs_length += user.inputsLength;
+        }
+        total_users += Object.keys(room.users).length;
+    }
+    console.log(`Total rooms: ${Object.keys(rooms).length}`);
+    console.log(`Total users: ${total_users}`);
+    console.log(`Total inputs capacity: ${total_inputs_capacity}`);
+    console.log(`Total inputs length:   ${total_inputs_length}`);
 }
 
 function joinRoom(roomId, userId) {
@@ -57,11 +72,7 @@ function joinRoom(roomId, userId) {
         rooms[roomId] = room;
     }
     
-    // Check if user already exists to avoid duplicates - O(1) with object property access
-    if (!room.users[userId]) {
-        // Add new user
-        room.users[userId] = new User(userId);
-    }
+    room.users[userId] = new User(userId);
 }
 
 function addUserInputs(roomId, userId, inputs) {
@@ -77,7 +88,7 @@ function addUserInputs(roomId, userId, inputs) {
         // Check if we need to resize the Uint8Array
         if (user.inputsLength + inputs.length > user.inputs.length) {
             // Need more capacity - allocate new larger array
-            const newSize = (user.inputsLength + inputs.length)+100;
+            const newSize = (user.inputsLength + inputs.length)*2;
             const newInputs = new Uint8Array(newSize);
             newInputs.set(user.inputs.subarray(0, user.inputsLength));
             user.inputs = newInputs;

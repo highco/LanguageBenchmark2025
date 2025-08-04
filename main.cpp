@@ -9,7 +9,7 @@ struct User {
     std::vector<uint8_t> inputs;
     
     User(int id) : user_id(id) {
-        inputs.reserve(128); // Pre-allocate for 64 operations * 10 inputs
+        inputs.reserve(64); // Pre-allocate for 64 operations * 10 inputs
     }
 };
 
@@ -18,7 +18,7 @@ struct Room {
     std::unordered_map<int, User*> users;
     
     Room(int id) : room_id(id) {
-        users.reserve(32); // Pre-allocate for expected number of users
+        users.reserve(64); // Pre-allocate for expected number of users
     }
     
     ~Room() {
@@ -44,11 +44,7 @@ void join_room(int room_id, int user_id) {
         room = room_it->second;
     }
     
-    // Check if user already exists to avoid duplicates
-    if (room->users.find(user_id) == room->users.end()) {
-        // Add new user with pre-allocated input capacity
-        room->users[user_id] = new User(user_id);
-    }
+    room->users[user_id] = new User(user_id);
 }
 
 void add_user_inputs(int room_id, int user_id, const std::vector<uint8_t>& inputs) {
@@ -71,7 +67,7 @@ void add_user_inputs(int room_id, int user_id, const std::vector<uint8_t>& input
         
         if (user->inputs.capacity() < needed_capacity) {
             // Need more capacity - allocate with room to grow
-            user->inputs.reserve(needed_capacity+100);
+            user->inputs.reserve(needed_capacity*2);
         }
         
         user->inputs.insert(user->inputs.end(), inputs.begin(), inputs.end());
@@ -84,18 +80,37 @@ void benchmark() {
     
     auto start_time = std::chrono::high_resolution_clock::now();
     
-    for (int i = 0; i < 50000000; ++i) {
-        join_room(i % 17, i % 997);
+    for(int room_id = 0; room_id < 977; ++room_id) {
+        for(int user_id = 0; user_id < 173; ++user_id) {
+            join_room(room_id, user_id);
+        }
     }
     
-    for (int i = 0; i < 50000000; ++i) {
-        add_user_inputs(i % 17, i % 997, sample_inputs);
+    for (int i = 0; i < 123456789; ++i) {
+        add_user_inputs(i % 997, i % 173, sample_inputs);
     }
     
     auto end_time = std::chrono::high_resolution_clock::now();
     
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
     std::cout << duration.count()/1000.0 << " seconds" << std::endl;
+
+    int total_inputs_capacity = 0;
+    int total_inputs_length = 0;
+    int total_users = 0;
+    for (auto& pair : rooms) {
+        Room* room = pair.second;
+        for (auto& pair : room->users) {
+            User* user = pair.second;
+            total_inputs_capacity += user->inputs.capacity();
+            total_inputs_length += user->inputs.size();
+        }
+        total_users += room->users.size();
+    }
+    std::cout << "Total rooms: " << rooms.size() << std::endl;
+    std::cout << "Total users: " << total_users << std::endl;
+    std::cout << "Total inputs capacity: " << total_inputs_capacity << std::endl;
+    std::cout << "Total inputs length:   " << total_inputs_length << std::endl;
 }
 
 void cleanup() {
