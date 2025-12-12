@@ -1,0 +1,15 @@
+C:\Projects\LanguageBenchmark2025\bin\Release\net9.0\LanguageBenchmark2025.exe
+C:\Projects\LanguageBenchmark2025\bin\Release\net9.0\LanguageBenchmark2025.deps.json
+C:\Projects\LanguageBenchmark2025\bin\Release\net9.0\LanguageBenchmark2025.runtimeconfig.json
+C:\Projects\LanguageBenchmark2025\bin\Release\net9.0\LanguageBenchmark2025.dll
+C:\Projects\LanguageBenchmark2025\bin\Release\net9.0\LanguageBenchmark2025.pdb
+C:\Projects\LanguageBenchmark2025\obj\Release\net9.0\LanguageBenchmark2025.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\LanguageBenchmark2025\obj\Release\net9.0\LanguageBenchmark2025.AssemblyInfoInputs.cache
+C:\Projects\LanguageBenchmark2025\obj\Release\net9.0\LanguageBenchmark2025.AssemblyInfo.cs
+C:\Projects\LanguageBenchmark2025\obj\Release\net9.0\LanguageBenchmark2025.csproj.CoreCompileInputs.cache
+C:\Projects\LanguageBenchmark2025\obj\Release\net9.0\LanguageBenchmark2025.sourcelink.json
+C:\Projects\LanguageBenchmark2025\obj\Release\net9.0\LanguageBenchmark2025.dll
+C:\Projects\LanguageBenchmark2025\obj\Release\net9.0\refint\LanguageBenchmark2025.dll
+C:\Projects\LanguageBenchmark2025\obj\Release\net9.0\LanguageBenchmark2025.pdb
+C:\Projects\LanguageBenchmark2025\obj\Release\net9.0\LanguageBenchmark2025.genruntimeconfig.cache
+C:\Projects\LanguageBenchmark2025\obj\Release\net9.0\ref\LanguageBenchmark2025.dll
