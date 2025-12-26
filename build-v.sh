@@ -1,0 +1,1 @@
+v -prod -o bin/v main.v
