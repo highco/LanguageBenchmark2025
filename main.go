@@ -29,35 +29,35 @@ func benchmark() {
 	var startTime = time.Now()
 
 	for room_id := 0; room_id < 977; room_id++ {
-        for user_id := 0; user_id < 173; user_id++ {
-            join_room(room_id, user_id);
-        }
-    }
-    
-    for i := 0; i < 123_456_789; i++ {
-        add_user_inputs(i % 997, i % 173, sample_inputs[:]);
-    }
+		for user_id := 0; user_id < 173; user_id++ {
+			join_room(room_id, user_id)
+		}
+	}
+
+	for i := 0; i < 123_456_789; i++ {
+		add_user_inputs(i%977, i%173, sample_inputs[:])
+	}
 
 	var endTime = time.Now()
 
 	fmt.Println(endTime.Sub(startTime))
 
-	total_inputs_capacity := 0;
-    total_inputs_length := 0;
-    total_users := 0
-    for roomId := range rooms {
-        room := rooms[roomId];
-        for userId := range room.users {
-            user := room.users[userId];
-            total_inputs_capacity += cap(user.Inputs);
-            total_inputs_length += len(user.Inputs);
-        }
-        total_users += len(room.users);
-    }
-    fmt.Println("Total rooms: ", len(rooms));
-    fmt.Println("Total users: ", total_users);
-    fmt.Println("Total inputs capacity: ", total_inputs_capacity);
-    fmt.Println("Total inputs length:   ", total_inputs_length);
+	total_inputs_capacity := 0
+	total_inputs_length := 0
+	total_users := 0
+	for roomId := range rooms {
+		room := rooms[roomId]
+		for userId := range room.users {
+			user := room.users[userId]
+			total_inputs_capacity += cap(user.Inputs)
+			total_inputs_length += len(user.Inputs)
+		}
+		total_users += len(room.users)
+	}
+	fmt.Println("Total rooms: ", len(rooms))
+	fmt.Println("Total users: ", total_users)
+	fmt.Println("Total inputs capacity: ", total_inputs_capacity)
+	fmt.Println("Total inputs length:   ", total_inputs_length)
 
 }
 

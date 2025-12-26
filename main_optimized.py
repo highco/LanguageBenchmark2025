@@ -33,11 +33,11 @@ def benchmark():
     
     # First loop: join rooms - using local variables for faster access
     for i in range(50_000_000):
-        join_room_func(i % 17, i % 997)
+        join_room_func(i % 17, i % 977)
     
     # Second loop: add user inputs
     for i in range(50_000_000):
-        add_user_inputs_func(i % 17, i % 997, sample_inputs)
+        add_user_inputs_func(i % 17, i % 977, sample_inputs)
     
     end_time = time.perf_counter()
     

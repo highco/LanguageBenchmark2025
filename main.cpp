@@ -87,7 +87,7 @@ void benchmark() {
     }
     
     for (int i = 0; i < 123456789; ++i) {
-        add_user_inputs(i % 997, i % 173, sample_inputs);
+        add_user_inputs(i % 977, i % 173, sample_inputs);
     }
     
     auto end_time = std::chrono::high_resolution_clock::now();

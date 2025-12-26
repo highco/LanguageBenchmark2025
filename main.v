@@ -45,7 +45,7 @@ fn benchmark(mut ctx Context) {
 
 	// Add inputs
 	for i := 0; i < 123_456_789; i++ {
-		add_user_inputs(mut ctx, i % 997, i % 173, sample_inputs)
+		add_user_inputs(mut ctx, i % 977, i % 173, sample_inputs)
 	}
 
 	elapsed := sw.elapsed().seconds()

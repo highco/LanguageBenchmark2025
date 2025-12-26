@@ -57,7 +57,7 @@ static class Program
 
 		for (int i = 0; i < 123_456_789; i++)
 		{
-			AddUserInputs(i % 997, i % 173, sampleInputs);
+			AddUserInputs(i % 977, i % 173, sampleInputs);
 		}
 
 		sw.Stop();

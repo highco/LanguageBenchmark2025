@@ -36,7 +36,7 @@ function benchmark() {
     }
     
     for (let i = 0; i < 123_456_789; i++) {
-        addUserInputs(i % 997, i % 173, sampleInputs);
+        addUserInputs(i % 977, i % 173, sampleInputs);
     }
     
     const endTime = process.hrtime.bigint();

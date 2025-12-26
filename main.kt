@@ -48,7 +48,7 @@ private fun benchmark() {
         
         // Second loop: add user inputs
         for (i in 0 until 123_456_789) {
-            addUserInputs(i % 997, i % 173, sampleInputs);
+            addUserInputs(i % 977, i % 173, sampleInputs);
         }
     }
     

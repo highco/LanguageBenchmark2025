@@ -39,7 +39,7 @@ fn benchmark() {
     }
     
     for i in 0..123_456_789 {
-        add_user_input(i % 997, i % 173, &sample_inputs);
+        add_user_input(i % 977, i % 173, &sample_inputs);
     }
 
 	let end = Instant::now();

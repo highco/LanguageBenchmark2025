@@ -31,7 +31,7 @@ def benchmark():
             join_room(room_id, user_id);
     
     for i in range(123_456_789):
-        add_user_inputs(i % 997, i % 173, sample_inputs);
+        add_user_inputs(i % 977, i % 173, sample_inputs);
     
     end_time = time.perf_counter()
     
